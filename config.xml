@@ -10,10 +10,13 @@
     <icon src="icon.png" />
     <content src="index.html" />
     <preference name="android-minSdkVersion" value="14" />
+    
     <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
-    <plugin source="git" spec="https://github.com/pushbots/phonegap" />
+
+    <gap:plugin name="pushbots-cordova-plugin" spec="^1.4.0" source="npm" />
     <preference name="phonegap-version" value="cli-6.3.0" />
     <preference name="android-build-tool" value="gradle" />
+    
     <access origin="*" />
     <access origin="*.pushbots.com" />
     <allow-intent href="http://*/*" />

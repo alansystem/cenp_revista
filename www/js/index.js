@@ -37,16 +37,6 @@ var app = {
 
         window.plugins.PushbotsPlugin.initialize("583df4814a9efa61a78b456d", {"android":{"sender_id":"364925031999"}});
 
-        // First time registration 
-        // This will be called on token registration/refresh with Android and with every runtime with iOS 
-        window.plugins.PushbotsPlugin.on("registered", function(token){
-            console.log("Registration Id:" + token);
-        });
-         
-        window.plugins.PushbotsPlugin.getRegistrationId(function(token){
-            console.log("Registration Id:" + token);
-        });
-
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
