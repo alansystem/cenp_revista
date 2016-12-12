@@ -72,7 +72,7 @@
             $.ajax({
               method: "GET",
               async: false,
-              url: "http://clarearpropaganda.com.br/teste/revista/revista/leitor/apiRevistas",
+              url: "http://clarearpropaganda.com.br/appcenp/revista/revista/leitor/apiRevistas",
                 crossDomain: true,
                 dataType: 'html',
                  beforeSend: function() { $('#wait').show(); },
@@ -89,7 +89,9 @@
                     $('.revistas').html(resultado);     
                   })
                   .fail(function() {
-                    alert( "error" );
+                    
+                    alert( "Por favor verifique sua conexão com a internet e tente novamente." );
+                    location.href="login.html";
                   })
                   .always(function() {
                     //alert( "complete" );

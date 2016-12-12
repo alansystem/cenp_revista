@@ -74,7 +74,7 @@
               method: "POST",
               async: false,
               data: {email:email,senha:senha},
-              url: "http://clarearpropaganda.com.br/teste/revista/revista/leitor/apiLogin",
+              url: "http://clarearpropaganda.com.br/appcenp/revista/revista/leitor/apiLogin",
                 crossDomain: true,
                 dataType: 'html',
                  beforeSend: function() { $('#wait').show(); },
@@ -113,7 +113,9 @@
 
                   })
                   .fail(function() {
-                    alert( "error" );
+                    
+                    alert( "Por favor verifique sua conexão com a internet e tente novamente." );
+                    location.href="login.html";
                   })
                   .always(function() {
                     //alert( "complete" );

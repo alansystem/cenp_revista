@@ -112,7 +112,7 @@
               method: "POST",
               async: false,
               data: {nome:nome,cpf:cpf,empresa:empresa,ramo_atividade:ramo_atividade,cargo:cargo,telefone:telefone,cidade:cidade,uf:uf,email:email,senha:senha},
-              url: "http://clarearpropaganda.com.br/teste/revista/revista/leitor/apiCadastro",
+              url: "http://clarearpropaganda.com.br/appcenp/revista/revista/leitor/apiCadastro",
                 crossDomain: true,
                 dataType: 'html',
                 
@@ -146,7 +146,8 @@
 
                   })
                   .fail(function() {
-                    alert( "error" );
+                    alert( "Por favor verifique sua conexão com a internet e tente novamente." );
+                    location.href="login.html";
                   })
                   .always(function() {
                     //alert( "complete" );

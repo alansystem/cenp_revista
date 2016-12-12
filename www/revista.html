@@ -47,7 +47,7 @@
 
     <script type="text/javascript">
 
-    var url_sistema = 'http://clarearpropaganda.com.br/teste/revista/revista/leitor/';
+    var url_sistema = 'http://clarearpropaganda.com.br/appcenp/revista/revista/leitor/';
 
 
 
@@ -120,7 +120,7 @@
                 localStorage.setItem('page_current_'+revista_id,page_current);
                 
                 //$('#revistaPages').html('<img src="'+revistaPage+'" class="img-responsive center-block">');
-                //$('#revistaPages').html('<iframe src="http://clarearpropaganda.com.br/teste/revista/revista/leitor/teste" width="300" height="200"></iframe>');
+                //$('#revistaPages').html('<iframe src="http://clarearpropaganda.com.br/appcenp/revista/revista/leitor/teste" width="300" height="200"></iframe>');
 
                 $('#revistaPages').html('<iframe src="'+url_sistema+'/apiViewRevista/'+link_app+'/page'+page_current+'" width="100%" height="'+alturaTela+'"></iframe>');
 
@@ -141,7 +141,7 @@
               method: "POST",
               data: {id_revista:id_revista},
               async: false,
-              url: "http://clarearpropaganda.com.br/teste/revista/revista/leitor/apiRevistaEspecifica",
+              url: "http://clarearpropaganda.com.br/appcenp/revista/revista/leitor/apiRevistaEspecifica",
                 crossDomain: true,
                 dataType: 'html',
                  beforeSend: function() { $('#wait').show(); },
@@ -187,7 +187,9 @@
                     
                   })
                   .fail(function() {
-                    alert( "error" );
+                    
+                    alert( "Por favor verifique sua conexão com a internet e tente novamente." );
+                    location.href="login.html";
                   })
                   .always(function() {
                     //alert( "complete" );
