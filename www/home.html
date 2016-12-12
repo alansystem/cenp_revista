@@ -65,7 +65,13 @@
         });
 
         $( document ).on( "click", ".btnViewRevista", function() {
-                localStorage.setItem('revista_id',$(this).attr('id'));
+
+            var idRevista_numeroRevista = $(this).attr('id');
+
+            var revista = idRevista_numeroRevista.split('_');
+
+                localStorage.setItem('revista_id',revista[0]);
+                localStorage.setItem('revista_numero',revista[1]);
         });
 
 
