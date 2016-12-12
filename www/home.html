@@ -70,8 +70,15 @@
 
             var revista = idRevista_numeroRevista.split('_');
 
+            var idLeitor = localStorage.getItem('id_cadastro');
+
                 localStorage.setItem('revista_id',revista[0]);
                 localStorage.setItem('revista_numero',revista[1]);
+
+                //Contabiliza
+                $.get('http://clarearpropaganda.com.br/appcenp/revista/revista/revista/apiContador/appcenp/'+revista[0]+'/'+idLeitor,function(data){
+                    console.log(data);
+                });
         });
 
 
