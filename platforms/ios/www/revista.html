@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.css">
+
+    <title>CENP</title>
+
+</head>
+
+<body>
+
+
+            <div class="container">
+
+            <div class="alert alert-success text-center continueLendo" style="display: none">
+              <strong>Continue a leitura:</strong> A página abaixo é de acordo com a última página visualizada desta edição.
+            </div>
+
+                <div class="row text-center">
+                    <a href="home.html" class="btn btn-primary" style="color:#FFF">Edições</a>
+                    <a href="#" class="btn btn-primary previousPage" style="color:#FFF">Página Anterior</a>
+                    <a href="#" class="btn btn-primary nextPage" style="color:#FFF">Próxima Página</a>
+                </div>
+
+                <div class="row text-center">
+
+                    <div class="col-sm-12 col-xs-12" id="revistaPages">
+                    </div>
+ 
+                </div>
+
+            
+            </div><!-- Fim container -->
+
+    
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <!--<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
+
+    <script type="text/javascript">
+
+    var url_sistema = 'http://clarearpropaganda.com.br/appcenp/revista/revista/leitor/';
+
+
+
+
+       $(function(){
+       
+            var revista_id = localStorage.getItem('revista_id');
+            var page_current = localStorage.getItem('page_current_'+revista_id);
+
+            if(page_current == 1 || page_current == null)
+            {
+                $('.previousPage').css('display','none');
+
+            }else{
+                /*
+                $('.continueLendo').fadeIn('slow');
+
+                setTimeout(function(){ 
+                    
+                    $('.continueLendo').fadeOut('slow');
+
+                }, 7000); */
+
+                
+            }
+
+
+            $('.previousPage').click(function(){
+
+                $('.nextPage').css('display','inline');
+
+                //var revistaPage = $(this).attr('id');
+                var alturaTela = screen.height;
+                var link_app = localStorage.getItem('link_app');
+                var revista_id = localStorage.getItem('revista_id');
+
+                var page_current = parseInt(localStorage.getItem('page_current_'+revista_id))-1;
+
+
+
+                localStorage.setItem('page_current_'+revista_id,page_current);
+
+                
+                //$('#revistaPages').html('<img src="'+revistaPage+'" class="img-responsive center-block">');
+                //$('#revistaPages').html('<img src="'+revistaPage+'">');
+                $('#revistaPages').html('<iframe src="'+url_sistema+'/apiViewRevista/'+link_app+'/page'+page_current+'" width="100%" height="'+alturaTela+'"></iframe>');
+
+                $('.previousPage').attr('id',link_app+'/page'+(parseInt(page_current)-1)+'.jpg');
+                $('.nextPage').attr('id',link_app+'/page'+(parseInt(page_current)+1)+'.jpg');
+
+                //Esconde o botão
+                if(localStorage.getItem('page_current_'+revista_id) == 1)
+                {
+                        $('.previousPage').css('display','none');
+                }
+
+            });
+
+            $('.nextPage').click(function(){
+
+                $('.previousPage').css('display','inline');
+
+                //var revistaPage = $(this).attr('id');
+                var alturaTela = screen.height;
+                var link_app = localStorage.getItem('link_app');
+                var revista_id = localStorage.getItem('revista_id');
+
+                var page_current = parseInt(localStorage.getItem('page_current_'+revista_id))+1;
+
+                localStorage.setItem('page_current_'+revista_id,page_current);
+                
+                //$('#revistaPages').html('<img src="'+revistaPage+'" class="img-responsive center-block">');
+                //$('#revistaPages').html('<iframe src="http://clarearpropaganda.com.br/appcenp/revista/revista/leitor/teste" width="300" height="200"></iframe>');
+
+                $('#revistaPages').html('<iframe src="'+url_sistema+'/apiViewRevista/'+link_app+'/page'+page_current+'" width="100%" height="'+alturaTela+'"></iframe>');
+
+
+                $('.previousPage').attr('id',link_app+'/page'+(parseInt(page_current)-1)+'.jpg');
+                $('.nextPage').attr('id',link_app+'/page'+(parseInt(page_current)+1)+'.jpg');
+
+                //Esconde botão
+                if(localStorage.getItem('page_current_'+revista_id) == localStorage.getItem('total_pages'))
+                {
+                        $('.nextPage').css('display','none');
+                }
+            });
+
+            var id_revista = localStorage.getItem('revista_id');
+
+            $.ajax({
+              method: "POST",
+              data: {id_revista:id_revista},
+              async: false,
+              url: "http://clarearpropaganda.com.br/appcenp/revista/revista/leitor/apiRevistaEspecifica",
+                crossDomain: true,
+                dataType: 'html',
+                 beforeSend: function() { $('#wait').show(); },
+                complete: function() { $('#wait').hide(); },
+                
+                statusCode: {
+                404: function() {
+                  console.log('Página fora do ar');
+                }
+                }
+                  
+                })
+                  .done(function(resultado) {
+                    var dados = resultado.split(';');
+
+                    localStorage.setItem('link_app',dados[0]);
+                    localStorage.setItem('total_pages',dados[1]);
+
+
+                    var alturaTela = screen.height;
+
+                    if(localStorage.getItem('page_current_'+id_revista) > 1){
+
+                        var page_current = localStorage.getItem('page_current_'+id_revista); 
+
+                        //$('#nextPage').attr('href',dados[0]+'/page'+(parseInt(page_current)+1)+'.jpg');
+                        $('.nextPage').attr('id',dados[0]+'/page'+(parseInt(page_current)+1)+'.jpg');
+
+                        //$('#revistaPages').html('<img src="'+dados[0]+'/page'+page_current+'.jpg" class="img-responsive center-block">');
+                        //$('#revistaPages').html('<img src="'+dados[0]+'/page'+page_current+'.jpg">');
+                        $('#revistaPages').html('<iframe src="'+url_sistema+'/apiViewRevista/'+dados[0]+'/page'+page_current+'" width="100%" height="'+alturaTela+'"></iframe>');
+
+                    }else{
+                        localStorage.setItem('page_current_'+id_revista,1);
+
+                        $('.nextPage').attr('id',dados[0]+'/page2.jpg');
+
+                        //$('#revistaPages').html('<img src="'+dados[0]+'/page1.jpg" class="img-responsive center-block">');
+                        //$('#revistaPages').html('<img src="'+dados[0]+'/page1.jpg" class="zoom" data-magnify-src="'+dados[0]+'/page1.jpg" width="80">');
+                        
+                        $('#revistaPages').html('<iframe src="'+url_sistema+'/apiViewRevista/'+dados[0]+'/page1" width="100%" height="'+alturaTela+'"></iframe>');
+                    }
+                    
+                  })
+                  .fail(function() {
+                    
+                    alert( "Por favor verifique sua conexão com a internet e tente novamente." );
+                    location.href="login.html";
+                  })
+                  .always(function() {
+                    //alert( "complete" );
+                    // Initiate magnification powers
+                  
+                  });
+        
+        });
+    </script>
+
+    <!-- IVC TAG starts plowing -->
+    <script type="text/javascript">
+
+        var emailLeitor     = localStorage.getItem('email');
+        var numero_revista  = localStorage.getItem('revista_numero');
+
+        ;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalIvcNamespace=p.GlobalIvcNamespace||[];
+        p.GlobalIvcNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments)
+        };p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1;
+        n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","//ivccftag.ivcbrasil.org.br/ivc.js","ivc"));
+
+        window.ivc('newTracker', 'cf', 'ivccf.ivcbrasil.org.br', {
+         idWeb: '105'
+        });
+
+        window.ivc('setUserId', emailLeitor);
+        window.ivc('trackPageView');
+
+        window.ivc('trackStructEvent', 'CENP','EdicaoView',numero_revista,'','');
+
+
+    </script>
+<!-- IVC TAG stops plowing -->
+
+</body>
+
+</html>

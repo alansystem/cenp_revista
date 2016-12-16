@@ -1,0 +1,43 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"PushbotsPlugin\"><param name=\"ios-package\" value=\"PushbotsPlugin\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "installed_plugins": {
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "br.com.cenp"
+        },
+        "pushbots-cordova-plugin": {
+            "PACKAGE_NAME": "br.com.cenp"
+        }
+    },
+    "dependent_plugins": {},
+    "modules": [
+        {
+            "id": "pushbots-cordova-plugin.PushbotsPlugin",
+            "file": "plugins/pushbots-cordova-plugin/www/pushbots.js",
+            "pluginId": "pushbots-cordova-plugin",
+            "clobbers": [
+                "PushbotsPlugin"
+            ]
+        }
+    ],
+    "plugin_metadata": {
+        "cordova-plugin-whitelist": "1.2.2",
+        "pushbots-cordova-plugin": "1.4.1"
+    }
+}

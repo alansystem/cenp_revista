@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.css">
+
+    <title>CENP</title>
+</head>
+
+<body>
+
+                <div data-role="header" data-position="fixed">
+                    <center>
+                        <img src="img/cenp-logo.png" class="img-responsive">    
+                    </center>
+                </div>
+
+                <div data-role="header" style="margin-bottom: 20px">
+                        <a href="login.html" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-delete btnLogout" data-transition="turn">Logout</a>
+                        <br>
+                        <button class="ui-btn-right ui-btn ui-btn-b ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-check nomeLogado"></button>                    
+                </div>
+
+            <div class="container">
+
+                <div class="row text-center" style="margin-top:100px;display: none">
+                    <img src="img/ajax-loader.gif" id="wait">
+                </div>
+                    
+                <div class="revistas row"></div>
+
+
+            </div><!-- Fim container -->
+
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <script type="text/javascript">
+        $(function(){
+
+        $('.nomeLogado').html(localStorage.getItem('nome'));
+
+        //Logout
+        $('.btnLogout').click(function(){
+            localStorage.setItem('logado','false');
+            location.href="login.html";
+        });
+
+        $('.btnLeitorPDF').click(function(){
+            location.href="leitor_pdf.html";
+        });
+
+        $( document ).on( "click", ".btnViewRevista", function() {
+
+            var idRevista_numeroRevista = $(this).attr('id');
+
+            var revista = idRevista_numeroRevista.split('_');
+
+            var idLeitor = localStorage.getItem('id_cadastro');
+
+                localStorage.setItem('revista_id',revista[0]);
+                localStorage.setItem('revista_numero',revista[1]);
+
+                //Contabiliza
+                $.get('http://clarearpropaganda.com.br/appcenp/revista/revista/revista/apiContador/appcenp/'+revista[0]+'/'+idLeitor,function(data){
+                    console.log(data);
+                });
+        });
+
+
+            $.ajax({
+              method: "GET",
+              async: false,
+              url: "http://clarearpropaganda.com.br/appcenp/revista/revista/leitor/apiRevistas",
+                crossDomain: true,
+                dataType: 'html',
+                 beforeSend: function() { $('#wait').show(); },
+                complete: function() { $('#wait').hide(); },
+                
+                statusCode: {
+                404: function() {
+                  console.log('Página fora do ar');
+                }
+                }
+                  
+                })
+                  .done(function(resultado) {
+                    $('.revistas').html(resultado);     
+                  })
+                  .fail(function() {
+                    
+                    alert( "Por favor verifique sua conexão com a internet e tente novamente." );
+                    location.href="login.html";
+                  })
+                  .always(function() {
+                    //alert( "complete" );
+                  });
+                                  
+
+        });
+    </script>
+
+</body>
+
+</html>
