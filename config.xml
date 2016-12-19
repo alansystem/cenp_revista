@@ -16,6 +16,7 @@
     <preference name="android-build-tool" value="gradle" />
     <access origin="*" />
     <access origin="*.pushbots.com" />
+    <allow-navigation href="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
