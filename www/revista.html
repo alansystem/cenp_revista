@@ -25,7 +25,7 @@
             </div>
 
                 <div class="row text-center" style="background: #191970;padding:10px">
-                    <div class="col-sm-3 col-xs-3">
+                    <div class="col-sm-4 col-xs-4">
                         <a href="home.html" class="btn btn-default" style="color:#000;height:40px">Edições</a>
                     </div>
 
@@ -103,7 +103,7 @@
 
             if(page_current == 1 || page_current == null)
             {
-                $('.previousPage').css('display','none');
+                $('.previousPage').css('visibility','hidden');
 
             }else{
                 /*
@@ -121,55 +121,66 @@
 
             $('.previousPage').click(function(){
 
-                //$('.nextPage').css('display','inline');
+                 //var revistaPage = $(this).attr('id');
+                    var alturaTela = screen.height;
+                    var link_app = localStorage.getItem('link_app');
+                    var revista_id = localStorage.getItem('revista_id');
 
-                //var revistaPage = $(this).attr('id');
-                var alturaTela = screen.height;
-                var link_app = localStorage.getItem('link_app');
-                var revista_id = localStorage.getItem('revista_id');
-
-                var page_current = parseInt(localStorage.getItem('page_current_'+revista_id))-1;
-
-
-
-                localStorage.setItem('page_current_'+revista_id,page_current);
-
-                $('.panzoom').html('<img src="http://www.cenp.com.br/Site/cenp_revista/'+link_app+'/page'+page_current+'.jpg" class="img-responsive">');
-
-
-                $('.previousPage').attr('id',link_app+'/page'+(parseInt(page_current)-1)+'.jpg');
-                $('.nextPage').attr('id',link_app+'/page'+(parseInt(page_current)+1)+'.jpg');
+                $('.nextPage').css('visibility','visible');
 
                 //Esconde o botão
                 if(localStorage.getItem('page_current_'+revista_id) == 1)
                 {
-                        $('.previousPage').css('display','none');
+                    return false;
+
+                }else{
+
+                    var page_current = parseInt(localStorage.getItem('page_current_'+revista_id))-1;
+
+
+
+                    localStorage.setItem('page_current_'+revista_id,page_current);
+
+                    $('.panzoom').html('<img src="http://www.cenp.com.br/Site/cenp_revista/'+link_app+'/page'+page_current+'.jpg" class="img-responsive">');
+
+
+                    $('.previousPage').attr('id',link_app+'/page'+(parseInt(page_current)-1)+'.jpg');
+                    $('.nextPage').attr('id',link_app+'/page'+(parseInt(page_current)+1)+'.jpg');
+    
                 }
+
+                
+
 
             });
 
             $('.nextPage').click(function(){
 
+
+                $('.previousPage').css('visibility','visible');
+
                 var alturaTela = screen.height;
                 var link_app = localStorage.getItem('link_app');
                 var revista_id = localStorage.getItem('revista_id');
 
-                var page_current = parseInt(localStorage.getItem('page_current_'+revista_id))+1;
-
-                localStorage.setItem('page_current_'+revista_id,page_current);
-                
-
-                $('.panzoom').html('<img src="http://www.cenp.com.br/Site/cenp_revista/'+link_app+'/page'+page_current+'.jpg" class="img-responsive">');
-
-
-                $('.previousPage').attr('id',link_app+'/page'+(parseInt(page_current)-1)+'.jpg');
-                $('.nextPage').attr('id',link_app+'/page'+(parseInt(page_current)+1)+'.jpg');
 
                 //Esconde botão
                 if(localStorage.getItem('page_current_'+revista_id) == localStorage.getItem('total_pages'))
                 {
-                        $('.nextPage').css('display','none');
-                }
+                        return false;
+                }else{
+                    var page_current = parseInt(localStorage.getItem('page_current_'+revista_id))+1;
+
+                    localStorage.setItem('page_current_'+revista_id,page_current);
+                    
+
+                    $('.panzoom').html('<img src="http://www.cenp.com.br/Site/cenp_revista/'+link_app+'/page'+page_current+'.jpg" class="img-responsive">');
+
+
+                    $('.previousPage').attr('id',link_app+'/page'+(parseInt(page_current)-1)+'.jpg');
+                    $('.nextPage').attr('id',link_app+'/page'+(parseInt(page_current)+1)+'.jpg');
+                }                
+
             });
 
             var id_revista = localStorage.getItem('revista_id');
