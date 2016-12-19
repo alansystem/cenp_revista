@@ -6,7 +6,7 @@
     <meta name="format-detection" content="telephone=no" />
     <meta http-equiv="pragma" content="no-cache" />
     <meta name="msapplication-tap-highlight" content="no" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <meta name="viewport" content="width=1210, user-scalable=yes">
 
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -24,15 +24,47 @@
               <strong>Continue a leitura:</strong> A página abaixo é de acordo com a última página visualizada desta edição.
             </div>
 
-                <div class="row text-center">
-                    <a href="home.html" class="btn btn-primary" style="color:#FFF">Edições</a>
-                    <a href="#" class="btn btn-primary previousPage" style="color:#FFF">Página Anterior</a>
-                    <a href="#" class="btn btn-primary nextPage" style="color:#FFF">Próxima Página</a>
+                <div class="row text-center" style="background: #191970;padding:10px">
+                    <div class="col-sm-3 col-xs-3">
+                        <a href="home.html" class="btn btn-default" style="color:#000;height:40px">Edições</a>
+                    </div>
+
+                    <div class="col-sm-4 col-xs-4">
+                        <a href="#" class="btn btn-default previousPage" style="color:#000;height:40px">Página Anterior</a>
+                    </div>
+
+                    <div class="col-sm-4 col-xs-4">
+                        <a href="#" class="btn btn-default nextPage" style="color:#000;height:40px">Próxima Página</a>
+                    </div>
                 </div>
 
                 <div class="row text-center">
 
                     <div class="col-sm-12 col-xs-12" id="revistaPages">
+                        <section>
+                            <div class="buttons row" style="text-align: center;margin-top:20px;">
+
+                                <div class="col-sm-2 col-xs-2">
+                                    <button class="zoom-in btn-info" style="width:100%;height:50px;color:#000">+</button>
+                                </div>
+                                <div class="col-sm-8 col-xs-8">
+                                    <button class="reset btn-info" style="width:100%;height:50px;color:#000">Remover Zoom</button>    
+                                </div>
+
+                                <div class="col-sm-2 col-xs-2">
+                                    <button class="zoom-out btn-info" style="width:100%;height:50px;color:#000">-</button>    
+                                </div>
+                                
+                                <!--<input type="range" class="zoom-range" style="margin-top:20px;margin-bottom:20px">-->
+                              </div>
+
+                            
+                            <div class="parent">
+                                <div class="panzoom">
+                                    <!--<img src="<?php echo $url; ?>.jpg" class="img-responsive">-->
+                                </div>
+                            </div>
+                        </section>
                     </div>
  
                 </div>
@@ -41,15 +73,27 @@
             </div><!-- Fim container -->
 
     
-    <script type="text/javascript" src="cordova.js"></script>
+    <!--<script type="text/javascript" src="cordova.js"></script>-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <!--<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
+
+    <script src="js/jquery.panzoom.js"></script>
+    <script type='text/javascript'>
+    (function() {
+          var $section = $('section').first();
+          $section.find('.panzoom').panzoom({
+            $zoomIn: $section.find(".zoom-in"),
+            $zoomOut: $section.find(".zoom-out"),
+            $zoomRange: $section.find(".zoom-range"),
+            $reset: $section.find(".reset")
+          });
+        })();
+  </script>
     <!--<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
 
     <script type="text/javascript">
 
     var url_sistema = 'http://clarearpropaganda.com.br/appcenp/revista/revista/leitor/';
-
-
 
 
        $(function(){
@@ -77,7 +121,7 @@
 
             $('.previousPage').click(function(){
 
-                $('.nextPage').css('display','inline');
+                //$('.nextPage').css('display','inline');
 
                 //var revistaPage = $(this).attr('id');
                 var alturaTela = screen.height;
@@ -90,10 +134,8 @@
 
                 localStorage.setItem('page_current_'+revista_id,page_current);
 
-                
-                //$('#revistaPages').html('<img src="'+revistaPage+'" class="img-responsive center-block">');
-                //$('#revistaPages').html('<img src="'+revistaPage+'">');
-                $('#revistaPages').html('<iframe src="'+url_sistema+'/apiViewRevista/'+link_app+'/page'+page_current+'" width="100%" height="'+alturaTela+'"></iframe>');
+                $('.panzoom').html('<img src="http://www.cenp.com.br/Site/cenp_revista/'+link_app+'/page'+page_current+'.jpg" class="img-responsive">');
+
 
                 $('.previousPage').attr('id',link_app+'/page'+(parseInt(page_current)-1)+'.jpg');
                 $('.nextPage').attr('id',link_app+'/page'+(parseInt(page_current)+1)+'.jpg');
@@ -108,9 +150,6 @@
 
             $('.nextPage').click(function(){
 
-                $('.previousPage').css('display','inline');
-
-                //var revistaPage = $(this).attr('id');
                 var alturaTela = screen.height;
                 var link_app = localStorage.getItem('link_app');
                 var revista_id = localStorage.getItem('revista_id');
@@ -119,10 +158,8 @@
 
                 localStorage.setItem('page_current_'+revista_id,page_current);
                 
-                //$('#revistaPages').html('<img src="'+revistaPage+'" class="img-responsive center-block">');
-                //$('#revistaPages').html('<iframe src="http://clarearpropaganda.com.br/appcenp/revista/revista/leitor/teste" width="300" height="200"></iframe>');
 
-                $('#revistaPages').html('<iframe src="'+url_sistema+'/apiViewRevista/'+link_app+'/page'+page_current+'" width="100%" height="'+alturaTela+'"></iframe>');
+                $('.panzoom').html('<img src="http://www.cenp.com.br/Site/cenp_revista/'+link_app+'/page'+page_current+'.jpg" class="img-responsive">');
 
 
                 $('.previousPage').attr('id',link_app+'/page'+(parseInt(page_current)-1)+'.jpg');
@@ -167,22 +204,17 @@
 
                         var page_current = localStorage.getItem('page_current_'+id_revista); 
 
-                        //$('#nextPage').attr('href',dados[0]+'/page'+(parseInt(page_current)+1)+'.jpg');
                         $('.nextPage').attr('id',dados[0]+'/page'+(parseInt(page_current)+1)+'.jpg');
 
-                        //$('#revistaPages').html('<img src="'+dados[0]+'/page'+page_current+'.jpg" class="img-responsive center-block">');
-                        //$('#revistaPages').html('<img src="'+dados[0]+'/page'+page_current+'.jpg">');
-                        $('#revistaPages').html('<iframe src="'+url_sistema+'/apiViewRevista/'+dados[0]+'/page'+page_current+'" width="100%" height="'+alturaTela+'"></iframe>');
+                        $('.panzoom').html('<img src="http://www.cenp.com.br/Site/cenp_revista/'+dados[0]+'/page'+page_current+'.jpg" class="img-responsive">');
 
                     }else{
                         localStorage.setItem('page_current_'+id_revista,1);
 
                         $('.nextPage').attr('id',dados[0]+'/page2.jpg');
 
-                        //$('#revistaPages').html('<img src="'+dados[0]+'/page1.jpg" class="img-responsive center-block">');
-                        //$('#revistaPages').html('<img src="'+dados[0]+'/page1.jpg" class="zoom" data-magnify-src="'+dados[0]+'/page1.jpg" width="80">');
-                        
-                        $('#revistaPages').html('<iframe src="'+url_sistema+'/apiViewRevista/'+dados[0]+'/page1" width="100%" height="'+alturaTela+'"></iframe>');
+
+                            $('.panzoom').html('<img src="http://www.cenp.com.br/Site/cenp_revista/'+dados[0]+'/page1.jpg" class="img-responsive">');
                     }
                     
                   })
