@@ -30,6 +30,7 @@
     <gap:plugin name="pushbots-cordova-plugin" source="npm" spec="^1.4.0" />
     <access origin="*" />
     <access origin="*.pushbots.com" />
+    <allow-navigation href="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />

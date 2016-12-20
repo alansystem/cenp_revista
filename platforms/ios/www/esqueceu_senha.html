@@ -63,6 +63,7 @@
         $('.btnEnviar').click(function(){
 
             var email = $('#email').val();
+            
 
             $.ajax({
               method: "POST",
@@ -82,6 +83,8 @@
                   
                 })
                   .done(function(resultado) {
+
+                    alert(resultado);
 
                     if(resultado == 'vazio')
                     {
