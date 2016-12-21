@@ -8,16 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		0207DA581B56EA530066E2B4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0207DA571B56EA530066E2B4 /* Images.xcassets */; };
+		0320C8392ED24A9D81BC39F2 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5B46A1D3CF947AA8905A5D0 /* CoreTelephony.framework */; };
 		1D3623260D0F684500981E51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		301BF552109A68D80062928A /* libCordova.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 301BF535109A57CC0062928A /* libCordova.a */; };
 		302D95F114D2391D003F00A1 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 302D95EF14D2391D003F00A1 /* MainViewController.m */; };
 		302D95F214D2391D003F00A1 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 302D95F014D2391D003F00A1 /* MainViewController.xib */; };
-		46331073CD2C4E08ADEFCC10 /* PushbotsPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A661D6AD5B84F0DB86C5EA1 /* PushbotsPlugin.m */; };
-		50063640B8FE49A7885F7481 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 560DD925DF5441E78CFFECBC /* SystemConfiguration.framework */; };
-		5EB547A6157C425AAA91C82E /* Pushbots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BC98A06998641CF8625C180 /* Pushbots.framework */; };
+		50A569B06125492DAAABE5B6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FBB886447B74879BB63804F /* SystemConfiguration.framework */; };
+		63E23B32A45E43548BA6C2A0 /* Pushbots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AA07F085E4B4730AB407658 /* Pushbots.framework */; };
 		6AFF5BF91D6E424B00AB3073 /* CDVLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AFF5BF81D6E424B00AB3073 /* CDVLaunchScreen.storyboard */; };
-		C2C0164E67D641D2BDAD6388 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0231A13E6BB147CAAAC3B765 /* CoreTelephony.framework */; };
+		D243EDA086854B04897BFF1F /* PushbotsPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFA224BEE814218880F6648 /* PushbotsPlugin.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,11 +39,10 @@
 
 /* Begin PBXFileReference section */
 		0207DA571B56EA530066E2B4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "CENP Revista/Images.xcassets"; sourceTree = SOURCE_ROOT; };
-		0231A13E6BB147CAAAC3B765 /* CoreTelephony.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
-		0D92966CD54B482BB7CF7067 /* PushbotsPlugin.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = PushbotsPlugin.h; path = "pushbots-cordova-plugin/PushbotsPlugin.h"; sourceTree = "<group>"; };
 		1D3623240D0F684500981E51 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* CENP Revista.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CENP Revista.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		22376BF15BD046E3A8FBB5DB /* PushbotsPlugin.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = PushbotsPlugin.h; path = "pushbots-cordova-plugin/PushbotsPlugin.h"; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		301BF52D109A57CC0062928A /* CordovaLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CordovaLib.xcodeproj; path = CordovaLib/CordovaLib.xcodeproj; sourceTree = "<group>"; };
 		301BF56E109A69640062928A /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = SOURCE_ROOT; };
@@ -54,14 +53,15 @@
 		3047A5101AB8059700498E2A /* build-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "build-release.xcconfig"; path = "cordova/build-release.xcconfig"; sourceTree = SOURCE_ROOT; };
 		3047A5111AB8059700498E2A /* build.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = build.xcconfig; path = cordova/build.xcconfig; sourceTree = SOURCE_ROOT; };
 		32CA4F630368D1EE00C91783 /* CENP Revista-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CENP Revista-Prefix.pch"; sourceTree = "<group>"; };
-		3BC98A06998641CF8625C180 /* Pushbots.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = Pushbots.framework; path = "CENP Revista/Plugins/pushbots-cordova-plugin/Pushbots.framework"; sourceTree = "<group>"; };
-		560DD925DF5441E78CFFECBC /* SystemConfiguration.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		5A661D6AD5B84F0DB86C5EA1 /* PushbotsPlugin.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = PushbotsPlugin.m; path = "pushbots-cordova-plugin/PushbotsPlugin.m"; sourceTree = "<group>"; };
+		5AA07F085E4B4730AB407658 /* Pushbots.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = Pushbots.framework; path = "CENP Revista/Plugins/pushbots-cordova-plugin/Pushbots.framework"; sourceTree = "<group>"; };
 		6AFF5BF81D6E424B00AB3073 /* CDVLaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = CDVLaunchScreen.storyboard; path = "CENP Revista/CDVLaunchScreen.storyboard"; sourceTree = SOURCE_ROOT; };
+		7FBB886447B74879BB63804F /* SystemConfiguration.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* CENP Revista-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "CENP Revista-Info.plist"; path = "CENP Revista/CENP Revista-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = SOURCE_ROOT; };
+		AEFA224BEE814218880F6648 /* PushbotsPlugin.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = PushbotsPlugin.m; path = "pushbots-cordova-plugin/PushbotsPlugin.m"; sourceTree = "<group>"; };
 		EB87FDF31871DA8E0020F90C /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../../www; sourceTree = "<group>"; };
 		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
 		ED33DF2A687741AEAF9F8254 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		F5B46A1D3CF947AA8905A5D0 /* CoreTelephony.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = "CENP Revista/config.xml"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -71,9 +71,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				301BF552109A68D80062928A /* libCordova.a in Frameworks */,
-				50063640B8FE49A7885F7481 /* SystemConfiguration.framework in Frameworks */,
-				C2C0164E67D641D2BDAD6388 /* CoreTelephony.framework in Frameworks */,
-				5EB547A6157C425AAA91C82E /* Pushbots.framework in Frameworks */,
+				50A569B06125492DAAABE5B6 /* SystemConfiguration.framework in Frameworks */,
+				0320C8392ED24A9D81BC39F2 /* CoreTelephony.framework in Frameworks */,
+				63E23B32A45E43548BA6C2A0 /* Pushbots.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,9 +144,9 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				560DD925DF5441E78CFFECBC /* SystemConfiguration.framework */,
-				0231A13E6BB147CAAAC3B765 /* CoreTelephony.framework */,
-				3BC98A06998641CF8625C180 /* Pushbots.framework */,
+				7FBB886447B74879BB63804F /* SystemConfiguration.framework */,
+				F5B46A1D3CF947AA8905A5D0 /* CoreTelephony.framework */,
+				5AA07F085E4B4730AB407658 /* Pushbots.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -172,8 +172,8 @@
 		307C750510C5A3420062BCA9 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				5A661D6AD5B84F0DB86C5EA1 /* PushbotsPlugin.m */,
-				0D92966CD54B482BB7CF7067 /* PushbotsPlugin.h */,
+				AEFA224BEE814218880F6648 /* PushbotsPlugin.m */,
+				22376BF15BD046E3A8FBB5DB /* PushbotsPlugin.h */,
 			);
 			name = Plugins;
 			path = "CENP Revista/Plugins";
@@ -294,7 +294,7 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
-				46331073CD2C4E08ADEFCC10 /* PushbotsPlugin.m in Sources */,
+				D243EDA086854B04897BFF1F /* PushbotsPlugin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
