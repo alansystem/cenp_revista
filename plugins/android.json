@@ -9,6 +9,9 @@
     "installed_plugins": {
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "br.com.cenp"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "br.com.cenp"
         }
     },
     "dependent_plugins": {}

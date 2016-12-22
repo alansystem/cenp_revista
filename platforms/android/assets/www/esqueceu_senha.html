@@ -8,7 +8,7 @@
     <meta name="msapplication-tap-highlight" content="no" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
 
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
     <link rel="stylesheet" href="css/bootstrap.css">
 
     <title>CENP</title>
@@ -53,7 +53,7 @@
     </script>
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="js/jquery.min.js"></script>
     <!--<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
 
     <script type="text/javascript">
@@ -63,12 +63,13 @@
         $('.btnEnviar').click(function(){
 
             var email = $('#email').val();
+            
 
             $.ajax({
               method: "POST",
               async: false,
               data: {email:email},
-              url: "http://clarearpropaganda.com.br/teste/revista/revista/leitor/apiRecuperarSenha",
+              url: "http://clarearpropaganda.com.br/appcenp/revista/revista/leitor/apiRecuperarSenha",
                 crossDomain: true,
                 dataType: 'html',
                  beforeSend: function() { $('#wait').show(); },
@@ -82,6 +83,8 @@
                   
                 })
                   .done(function(resultado) {
+
+                    alert(resultado);
 
                     if(resultado == 'vazio')
                     {
@@ -98,7 +101,10 @@
 
                   })
                   .fail(function() {
-                    alert( "error" );
+
+                    alert( "Por favor verifique sua conexão com a internet e tente novamente." );
+                    location.href="login.html";
+                    
                   })
                   .always(function() {
                     //alert( "complete" );
