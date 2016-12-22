@@ -97,8 +97,15 @@
 
        $(function(){
        
-            var revista_id = localStorage.getItem('revista_id');
-            var page_current = localStorage.getItem('page_current_'+revista_id);
+            var id_leitor       = localStorage.getItem('id_cadastro');
+            var revista_id      = localStorage.getItem('revista_id');
+            var page_current    = localStorage.getItem('page_current_'+revista_id);
+
+
+            //Contabiliza Acesso
+            $.post(url_sistema+'apiInsertContabilizaRevista',{id_revista:revista_id,id_leitor:id_leitor},function(){
+                console.log('Contabilizado');
+            });
 
             if(page_current == 1 || page_current == null)
             {
