@@ -54,6 +54,10 @@
     <script type="text/javascript">
         $(function(){
 
+        $('#teste').click(function(){
+            navigator.app.loadUrl("http://www.cenp.com.br", { openExternal:true } );
+        });  
+
         $('.nomeLogado').html(localStorage.getItem('nome'));
 
         //Logout
