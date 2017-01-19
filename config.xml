@@ -40,6 +40,7 @@
     <preference name="android-build-tool" value="gradle" />
     <access origin="*" />
     <access origin="*.pushbots.com" />
+     <access origin="http://www.cenp.com.br" browserOnly="true" />
     <allow-navigation href="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
