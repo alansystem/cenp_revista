@@ -14,8 +14,8 @@
 
     <script type="text/javascript">
          function loadURL(url){ 
-    navigator.app.loadUrl(url, { openExternal:true }); 
- } 
+            navigator.app.loadUrl(url, { openExternal:true }); 
+         } 
 
     </script>
 </head>
@@ -44,7 +44,7 @@
                 </div>
                     
                 <div class="revistas row"></div>
-                <a onclick="loadURL('http://www.clarearpropaganda.com.br/appcenp/revista/revista/leitor/downloadPDF/EDICAO_48')" href="#">Teste Download Revista</a>
+                <!--<a onclick="loadURL('http://www.clarearpropaganda.com.br/appcenp/revista/revista/leitor/downloadPDF/EDICAO_48')" href="#">Teste Download Revista</a>-->
 
 
             </div><!-- Fim container -->
@@ -62,6 +62,12 @@
     <script type="text/javascript">
         $(function(){
 
+            $( document ).on( "click", ".downloadPDF", function() {
+                var id = $(this).attr('id');
+                
+                console.log(id);
+                navigator.app.loadUrl('http://www.cenp.com.br/revista/revista/leitor/download'+'/'+id, { openExternal:true }); 
+            });
 
         $('.nomeLogado').html(localStorage.getItem('nome'));
 
