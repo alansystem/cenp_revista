@@ -39,7 +39,27 @@
                     </div>                    
                 </div>
 
+
             <div class="container">
+
+            <div class="modal fade" tabindex="-1" role="dialog">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Download</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p id="msgModal"></p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                  </div>
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+
 
                 <div class="row text-center" style="margin-top:100px;display: none">
                     <img src="img/ajax-loader.gif" id="wait">
@@ -59,15 +79,58 @@
     </script>
 
     <script src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
     <!--<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
 
     <script type="text/javascript">
         $(function(){
 
-            $( document ).on( "click", ".download", function() {
-                var edicao = $(this).attr('id');
 
-                downloadFile('http://www.cenp.com.br/Site/cenp_revista/'+edicao+'.pdf');
+
+            $( document ).on( "click", ".download", function() {
+                var edicao          = $(this).attr('id');
+                var revista_numero  = edicao.split('_');
+                var email           = localStorage.getItem('email');
+                var id_leitor       = localStorage.getItem('id_cadastro');
+                var id_revista      = localStorage.getItem('revista_id');
+
+                $.ajax({
+                  method: "POST",
+                  async: false,
+                  url: "http://clarearpropaganda.com.br/appcenp/revista/revista/leitor/apiFilaDownload",
+                    crossDomain: true,
+                    data: { edicao: edicao, email: email,id_leitor: id_leitor, id_revista: id_revista },
+                    dataType: 'html',
+                     beforeSend: function() { $('#wait').show(); },
+                    complete: function() { $('#wait').hide(); },
+                    
+                    statusCode: {
+                    404: function() {
+                      console.log('Página fora do ar');
+                    }
+                    }
+                      
+                    })
+                      .done(function(resultado) {
+                        
+                            $('.modal').modal();
+
+                            console.log(resultado);
+
+                      })
+                      .fail(function() {
+                        
+                        alert( "Por favor verifique sua conexão com a internet e tente novamente." );
+                      })
+                      .always(function() {
+                        //alert( "complete" );
+                      });
+
+                $('#msgModal').html('Recebemos sua solicitação para a <b>Edição '+revista_numero[1]+'</b>. <br>Dentro de alguns minutos você receberá em seu email <b>('+email+')</b> sua Revista. <br><br>Boa leitura.');
+
+
+
+                //downloadFile('http://www.cenp.com.br/Site/cenp_revista/'+edicao+'.pdf');
             });
             
 
