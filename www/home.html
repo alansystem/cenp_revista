@@ -10,12 +10,14 @@
 
     <link rel="stylesheet" href="css/bootstrap.css">
 
+    <script src="js/download.js"></script>
+
     <title>CENP</title>
 
     <script type="text/javascript">
          function loadURL(url){ 
             navigator.app.loadUrl(url, { openExternal:true }); 
-         } 
+         }             
 
     </script>
 </head>
@@ -62,6 +64,13 @@
     <script type="text/javascript">
         $(function(){
 
+            $( document ).on( "click", ".download", function() {
+                var edicao = $(this).attr('id');
+
+                downloadFile('http://www.cenp.com.br/Site/cenp_revista/'+edicao+'.pdf');
+            });
+            
+
             $( document ).on( "click", ".downloadPDF", function() {
                 var id = $(this).attr('id');
                 
@@ -102,7 +111,7 @@
             $.ajax({
               method: "GET",
               async: false,
-              url: "http://clarearpropaganda.com.br/appcenp/revista/revista/leitor/apiRevistas",
+              url: "http://clarearpropaganda.com.br/appcenp/revista/revista/leitor/apiRevistas2",
                 crossDomain: true,
                 dataType: 'html',
                  beforeSend: function() { $('#wait').show(); },
