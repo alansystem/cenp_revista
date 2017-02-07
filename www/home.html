@@ -91,6 +91,9 @@
 
 
             $( document ).on( "click", ".download", function() {
+
+
+
                 var edicao          = $(this).attr('id');
                 var revista_numero  = edicao.split('_');
                 var nome            = localStorage.getItem('nome');
@@ -98,9 +101,13 @@
                 var id_leitor       = localStorage.getItem('id_cadastro');
                 var id_revista      = localStorage.getItem('revista_id');
 
+
+                            $('.modal').modal();
+                            $('#msgModal').html('Recebemos sua solicitação para a <b>Edição '+revista_numero[1]+'</b>. <br>Dentro de alguns minutos você receberá em seu email <b>('+email+')</b> sua Revista. <br><br>Boa leitura.');
+
                 $.ajax({
                   method: "POST",
-                  async: false,
+                  async: true,
                   url: "http://clarearpropaganda.com.br/appcenp/revista/revista/leitor/apiFilaDownload",
                     crossDomain: true,
                     data: { edicao: edicao, email: email,id_leitor: id_leitor, id_revista: id_revista, nome: nome },
@@ -116,8 +123,6 @@
                       
                     })
                       .done(function(resultado) {
-                        
-                            $('.modal').modal();
 
                             console.log(resultado);
 
@@ -130,7 +135,6 @@
                         //alert( "complete" );
                       });
 
-                $('#msgModal').html('Recebemos sua solicitação para a <b>Edição '+revista_numero[1]+'</b>. <br>Dentro de alguns minutos você receberá em seu email <b>('+email+')</b> sua Revista. <br><br>Boa leitura.');
 
 
 
