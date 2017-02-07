@@ -66,7 +66,7 @@
                 </div>
                     
                 <div class="revistas row"></div>
-                <!--<a onclick="loadURL('http://www.clarearpropaganda.com.br/appcenp/revista/revista/leitor/downloadPDF/EDICAO_48')" href="#">Teste Download Revista</a>-->
+                <a id="teste" href="#">Teste Link</a>
 
 
             </div><!-- Fim container -->
@@ -85,11 +85,16 @@
     <script type="text/javascript">
         $(function(){
 
+          $("#teste").click(function(){
+            cordova.InAppBrowser.open('http://apache.org', '_blank', 'location=yes');
+          });
+
 
 
             $( document ).on( "click", ".download", function() {
                 var edicao          = $(this).attr('id');
                 var revista_numero  = edicao.split('_');
+                var nome            = localStorage.getItem('nome');
                 var email           = localStorage.getItem('email');
                 var id_leitor       = localStorage.getItem('id_cadastro');
                 var id_revista      = localStorage.getItem('revista_id');
@@ -99,7 +104,7 @@
                   async: false,
                   url: "http://clarearpropaganda.com.br/appcenp/revista/revista/leitor/apiFilaDownload",
                     crossDomain: true,
-                    data: { edicao: edicao, email: email,id_leitor: id_leitor, id_revista: id_revista },
+                    data: { edicao: edicao, email: email,id_leitor: id_leitor, id_revista: id_revista, nome: nome },
                     dataType: 'html',
                      beforeSend: function() { $('#wait').show(); },
                     complete: function() { $('#wait').hide(); },
