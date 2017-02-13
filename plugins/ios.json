@@ -15,7 +15,29 @@
         },
         "pushbots-cordova-plugin": {
             "PACKAGE_NAME": "br.com.cenp"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "br.com.cenp"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "br.com.cenp"
+        },
+        "cordova-plugin-zip": {
+            "PACKAGE_NAME": "br.com.cenp"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "br.com.cenp"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "br.com.cenp"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+        }
+    }
 }

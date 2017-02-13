@@ -1,0 +1,477 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=3, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi">
+    <!--<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />-->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link href="css/slick.css" rel="stylesheet" />
+    <link href="css/slick-theme.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <title>CENP</title>
+</head>
+<body>
+
+    <header id="header">
+        <div id="headerContainer">
+            <div class="alert alert-success text-center continueLendo" style="display: none">
+                <strong>Continue a leitura:</strong> A página abaixo é de acordo com a última página visualizada desta edição.
+            </div>
+
+            <div class="row text-center" style="background: #191970;margin-top: 20px">
+                <div class="col-sm-3 col-xs-3">
+                    <a href="home.html" class="btn btn-default" style="color:#000;height:40px">Edições</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="page">
+        <!--<button type="button" data-role="none" class="slick-prev slick-arrow" aria-label="Previous" role="button" style="display: block;">Previous</button>-->
+        <div id="pageContent">
+            <!--<div class="image">
+                <img data-lazy="img/lazyfonz4.png" class="slick-loading">
+            </div>-->
+        </div>
+        <!--<button type="button" data-role="none" class="slick-next slick-arrow" aria-label="Next" role="button" style="display: block;">Next</button>-->
+    </div>
+    <footer></footer>
+
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/slick.min.js"></script>
+    <script src="js/e-smart-zoom-jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+
+        });
+
+
+        function ZOOM() {
+            $('.imageFullScreen').smartZoom({ 'containerClass': 'zoomableContainer' });
+
+            $('#topPositionMap,#leftPositionMap,#rightPositionMap,#bottomPositionMap').bind("click", moveButtonClickHandler);
+            $('#zoomInButton,#zoomOutButton').bind("click", zoomButtonClickHandler);
+
+            function zoomButtonClickHandler(e) {
+                var scaleToAdd = 0.8;
+                if (e.target.id == 'zoomOutButton')
+                    scaleToAdd = -scaleToAdd;
+                $('.imageFullScreen').smartZoom('zoom', scaleToAdd);
+            }
+
+            function moveButtonClickHandler(e) {
+                var pixelsToMoveOnX = 0;
+                var pixelsToMoveOnY = 0;
+
+                switch (e.target.id) {
+                    case "leftPositionMap":
+                        pixelsToMoveOnX = 50;
+                        break;
+                    case "rightPositionMap":
+                        pixelsToMoveOnX = -50;
+                        break;
+                    case "topPositionMap":
+                        pixelsToMoveOnY = 50;
+                        break;
+                    case "bottomPositionMap":
+                        pixelsToMoveOnY = -50;
+                        break;
+                }
+                $('.imageFullScreen').smartZoom('pan', pixelsToMoveOnX, pixelsToMoveOnY);
+            }
+        }
+
+        function ZOOM2(c) {
+            $('.imagem' + c).smartZoom({ 'containerClass': 'zoomableContainer' });
+
+            $('#topPositionMap,#leftPositionMap,#rightPositionMap,#bottomPositionMap').bind("click", moveButtonClickHandler);
+            $('#zoomInButton,#zoomOutButton').bind("click", zoomButtonClickHandler);
+
+            function zoomButtonClickHandler(e) {
+                var scaleToAdd = 0.8;
+                if (e.target.id == 'zoomOutButton')
+                    scaleToAdd = -scaleToAdd;
+                $('.imagem' + c).smartZoom('zoom', scaleToAdd);
+            }
+
+            function moveButtonClickHandler(e) {
+                var pixelsToMoveOnX = 0;
+                var pixelsToMoveOnY = 0;
+
+                switch (e.target.id) {
+                    case "leftPositionMap":
+                        pixelsToMoveOnX = 50;
+                        break;
+                    case "rightPositionMap":
+                        pixelsToMoveOnX = -50;
+                        break;
+                    case "topPositionMap":
+                        pixelsToMoveOnY = 50;
+                        break;
+                    case "bottomPositionMap":
+                        pixelsToMoveOnY = -50;
+                        break;
+                }
+                $('.imagem' + c).smartZoom('pan', pixelsToMoveOnX, pixelsToMoveOnY);
+            }
+        }
+
+
+    </script>
+    <script type="text/javascript">
+        //jQuery(document).ready(function ($) {
+        //    var w = $('#flipbook-viewport').outerWidth();
+        //    var h = $(document).outerHeight() - $('.row:eq(0)').outerHeight() - 45;
+        //    $('.bxslider').bxSlider({
+        //        minSlides: 1,
+        //        maxSlides: 1,
+        //        slideWidth: w,
+        //        slideMargin: 10
+        //    });
+
+        //});
+    </script>
+    <script type="text/javascript">
+        var url_sistema = 'http://clarearpropaganda.com.br/appcenp/revista/revista/leitor/';
+
+        document.addEventListener("deviceready", onDeviceReady, false);
+        function onDeviceReady() {
+            var id_leitor = localStorage.getItem('id_cadastro');
+            var revista_id = localStorage.getItem('revista_id');
+            var page_current = localStorage.getItem('page_current_' + revista_id);
+
+
+            //Contabiliza Acesso
+            //$.post(url_sistema + 'apiInsertContabilizaRevista', { id_revista: revista_id, id_leitor: id_leitor }, function () {
+            //    console.log('Contabilizado');
+            //});
+
+            if (page_current == 1 || page_current == null) {
+                $('.previousPage').css('visibility', 'hidden');
+
+            } else {
+                /*
+                $('.continueLendo').fadeIn('slow');
+
+                setTimeout(function(){
+
+                    $('.continueLendo').fadeOut('slow');
+
+                }, 7000); */
+
+
+            }
+
+
+            //$('.previousPage').click(function () {
+
+            //    //var revistaPage = $(this).attr('id');
+            //    var alturaTela = screen.height;
+            //    var link_app = localStorage.getItem('link_app');
+            //    var revista_id = localStorage.getItem('revista_id');
+
+            //    $('.nextPage').css('visibility', 'visible');
+
+            //    //Esconde o botão
+            //    if (localStorage.getItem('page_current_' + revista_id) == 1) {
+            //        return false;
+
+            //    } else {
+
+            //        var page_current = parseInt(localStorage.getItem('page_current_' + revista_id)) - 1;
+
+
+
+            //        localStorage.setItem('page_current_' + revista_id, page_current);
+
+            //        //$('.panzoom').html('<img src="http://www.cenp.com.br/Site/cenp_revista/'+link_app+'/page'+page_current+'.jpg" class="img-responsive">');
+
+
+
+            //        $('.previousPage').attr('id', link_app + '/page' + (parseInt(page_current) - 1) + '.jpg');
+            //        $('.nextPage').attr('id', link_app + '/page' + (parseInt(page_current) + 1) + '.jpg');
+
+            //    }
+
+
+
+
+            //});
+
+            //$('.nextPage').click(function () {
+
+
+            //    $('.previousPage').css('visibility', 'visible');
+
+            //    var alturaTela = screen.height;
+            //    var link_app = localStorage.getItem('link_app');
+            //    var revista_id = localStorage.getItem('revista_id');
+
+
+            //    //Esconde botão
+            //    if (localStorage.getItem('page_current_' + revista_id) == localStorage.getItem('total_pages')) {
+            //        return false;
+            //    } else {
+            //        var page_current = parseInt(localStorage.getItem('page_current_' + revista_id)) + 1;
+
+            //        localStorage.setItem('page_current_' + revista_id, page_current);
+
+
+            //        $('.panzoom').html('<img src="http://www.cenp.com.br/Site/cenp_revista/' + link_app + '/page' + page_current + '.jpg" class="img-responsive">');
+
+
+            //        $('.previousPage').attr('id', link_app + '/page' + (parseInt(page_current) - 1) + '.jpg');
+            //        $('.nextPage').attr('id', link_app + '/page' + (parseInt(page_current) + 1) + '.jpg');
+            //    }
+
+            //});
+
+            var id_revista = localStorage.getItem('revista_id');
+            var numero_revista = localStorage.getItem('revista_numero');
+
+            //alert(numero_revista);
+
+            var existeDir = 0;
+
+            //window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dir) { dir.getDirectory("EDICAO_" + numero_revista, { create: false }, function (e) { local(); }, function (e) { online(); }); });
+            window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dir) { dir.getDirectory("EDICAO_" + numero_revista, { create: false }, function (e) { local(); }, function (e) { online(); }); });
+
+            function online() {
+                $.ajax({
+                    method: "POST",
+                    data: { id_revista: id_revista },
+                    async: false,
+                    url: "http://clarearpropaganda.com.br/appcenp/revista/revista/leitor/apiRevistaEspecifica",
+                    crossDomain: true,
+                    dataType: 'html',
+                    beforeSend: function () { $('#wait').show(); },
+                    complete: function () { $('#wait').hide(); },
+
+                    statusCode: {
+                        404: function () {
+                            console.log('Página fora do ar');
+                        }
+                    }
+
+                })
+                      .done(function (resultado) {
+                          var dados = resultado.split(';');
+
+                          localStorage.setItem('link_app', dados[0]);
+                          localStorage.setItem('total_pages', dados[1]);
+                          for (var c = 0; c < dados[1]; c++) {
+                              $('#flipbook').append('<div><img data-u="image" src="http://www.cenp.com.br/Site/cenp_revista/' + dados[0] + '/page' + parseInt(c + 1) + '.jpg" data-elem="pinchzoomer" /></div>');
+                              //$('#flipbook').append('<div><img src="http://www.cenp.com.br/Site/cenp_revista/' + dados[0] + '/page' + parseInt(c + 1) + '.jpg" class="img-responsive" style="width:100%;height:100%; max-width:100%; max-height:100%;"></div>');
+                          }
+
+
+                          var w = $('#flipbook-viewport').outerWidth();
+                          var h = $(document).outerHeight() - $('.row:eq(0)').outerHeight() - 45;
+                          //alert(w + ' - ' + h);
+
+                          window.setTimeout(function () {
+
+
+                          }, 100);
+
+
+                          //var alturaTela = screen.height;
+
+                          //if(localStorage.getItem('page_current_'+id_revista) > 1){
+
+                          //    var page_current = localStorage.getItem('page_current_'+id_revista);
+
+                          //    $('.nextPage').attr('id',dados[0]+'/page'+(parseInt(page_current)+1)+'.jpg');
+
+                          //    $('.panzoom').html('<img src="http://www.cenp.com.br/Site/cenp_revista/'+dados[0]+'/page'+page_current+'.jpg" class="img-responsive">');
+
+                          //}else{
+                          //    localStorage.setItem('page_current_'+id_revista,1);
+
+                          //    $('.nextPage').attr('id',dados[0]+'/page2.jpg');
+
+
+                          //        $('.panzoom').html('<img src="http://www.cenp.com.br/Site/cenp_revista/'+dados[0]+'/page1.jpg" class="img-responsive">');
+                          //}
+
+                      })
+                      .fail(function () {
+
+                          alert("Por favor verifique sua conexão com a internet e tente novamente.");
+                          location.href = "login.html";
+                      })
+                      .always(function () {
+                          //alert( "complete" );
+                          // Initiate magnification powers
+
+                      });
+
+            }
+
+            function local() {
+                var imagens = [];
+                var index = 0;
+                var i;
+                var addFileEntry = function (entry) {
+                    var dirReader = entry.createReader();
+                    dirReader.readEntries(
+                      function (entries) {
+                          var fileStr = "";
+                          var i;
+                          for (i = 0; i < entries.length; i++) {
+                              if (entries[i].isDirectory === true) {
+                                  // Recursive -- call back into this subdirectory
+                                  //addFileEntry(entries[i]);
+                              } else {
+                                  if (entries[i].fullPath.toLowerCase().indexOf('.jpg') > 0) {
+                                      //console.log(entries[i].fullPath);
+                                      //imagens[imagens.length] = cordova.file.dataDirectory + 'EDICAO_' + numero_revista + entries[i].fullPath;
+                                      imagens[imagens.length] = cordova.file.dataDirectory + entries[i].fullPath;
+                                  }
+                                  index++;
+                              }
+                          }
+
+
+                          var w = $('#page').outerWidth();
+                          var h = $(document).outerHeight() - $('.row:eq(0)').outerHeight() - 45;
+
+
+                          $('#pageContent').html('');
+                          for (var c = 0; c < imagens.length; c++) {
+                              //console.log(imagens[c]);
+                              //$('#pageContent').append('<div class="image divimagem" style="display:block;"><img data-lazy="' + imagens[c] + '" class="imageFullScreen slick-loading img-responsive imagem' + c + '" /></div>');
+                              $('#pageContent').append('<div class="image divimagem"><img data-lazy="' + imagens[c] + '" class="imageFullScreen slick-loading img-responsive imagem' + c + '" /></div>');
+                          }
+                          
+
+                          //alert(w + ' - ' + h);
+
+                          window.setTimeout(function () {
+
+                              //$('#imgContainer').bxSlider({
+                              //    infiniteLoop: false,
+                              //    minSlides: 1,
+                              //    maxSlides: 1,
+                              //    slideMargin: 1,
+                              //    pager: false,
+                              //    width: w,
+                              //    adaptiveHeight: true,
+                              //    startSlide: 3
+                              //});
+
+                              $('#pageContent').slick({
+                                  lazyLoad: 'ondemand',
+                                  slidesToShow: 1,
+                                  slidesToScroll: 1,
+                                  infinite: false,
+                                  arrows: true,
+                                  draggable: true
+                              });
+
+                              //ZOOM();
+
+                              for (var c = 0; c < imagens.length; c++) {
+                                  ZOOM2(c);
+                              }
+
+                              //$('.imageFullScreen').on('click', function () {
+                              //    if ($(this).hasClass('img-responsive')) {
+                              //        $(this).removeClass('img-responsive')
+                              //        $(this).addClass('img-responsive2')
+
+                              //        $(this).parent.removeClass('img-responsive')
+                              //        $(this).parent.addClass('img-responsive2')
+                              //    } else {
+                              //        $(this).removeClass('img-responsive2')
+                              //        $(this).addClass('img-responsive')
+
+                              //        $(this).parent.removeClass('img-responsive2')
+                              //        $(this).parent.addClass('img-responsive')
+                              //    }
+                              //});
+
+                          }, 200);
+
+                      },
+                      function (error) {
+                          console.error("readEntries error: " + error.code);
+                      }
+                    );
+                };
+
+                /**
+                 * Directory error.
+                 */
+                var addError = function (error) {
+                    console.error("getDirectory error: " + error.code);
+                };
+
+                //window.resolveLocalFileSystemURL(cordova.file.dataDirectory, addFileEntry, addError);
+                window.resolveLocalFileSystemURL(cordova.file.dataDirectory + 'EDICAO_' + numero_revista, addFileEntry, addError);
+
+
+
+
+            }
+
+
+
+
+
+            //Initialize the zoom viewport
+            //$('.magazine-viewport').zoom({
+            //    flipbook: $('#flipbook')
+            //});
+
+        }
+
+        $(function () {
+
+
+
+
+        });
+    </script>
+    <!-- IVC TAG starts plowing -->
+    <script type="text/javascript">
+
+        var emailLeitor = localStorage.getItem('email');
+        var numero_revista = localStorage.getItem('revista_numero');
+
+        ; (function (p, l, o, w, i, n, g) {
+            if (!p[i]) {
+                p.GlobalIvcNamespace = p.GlobalIvcNamespace || [];
+                p.GlobalIvcNamespace.push(i); p[i] = function () {
+                    (p[i].q = p[i].q || []).push(arguments)
+                }; p[i].q = p[i].q || []; n = l.createElement(o); g = l.getElementsByTagName(o)[0]; n.async = 1;
+                n.src = w; g.parentNode.insertBefore(n, g)
+            }
+        }(window, document, "script", "//ivccftag.ivcbrasil.org.br/ivc.js", "ivc"));
+
+        window.ivc('newTracker', 'cf', 'ivccf.ivcbrasil.org.br', {
+            idWeb: '105'
+        });
+
+        window.ivc('setUserId', emailLeitor);
+        window.ivc('trackPageView');
+
+        window.ivc('trackStructEvent', 'CENP', 'EdicaoView', numero_revista, '', '');
+
+
+    </script>
+
+    <script type="text/javascript">
+
+
+    </script>
+    <!-- IVC TAG stops plowing -->
+</body>
+</html>

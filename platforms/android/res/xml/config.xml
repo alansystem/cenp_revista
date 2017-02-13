@@ -1,14 +1,33 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="br.com.cenp" ios-CFBundleVersion="4.0.0" version="1.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="br.com.cenp" ios-CFBundleVersion="4.0.1" version="1.0.7" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <preference name="loglevel" value="DEBUG" />
     <feature name="Whitelist">
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
     </feature>
-    <name>CENP</name>
     <feature name="SplashScreen">
         <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
         <param name="onload" value="true" />
+    </feature>
+    <feature name="File">
+        <param name="android-package" value="org.apache.cordova.file.FileUtils" />
+        <param name="onload" value="true" />
+    </feature>
+    <allow-navigation href="cdvfile:*" />
+    <feature name="FileTransfer">
+        <param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer" />
+    </feature>
+    <feature name="InAppBrowser">
+        <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
+    </feature>
+    <feature name="Notification">
+        <param name="android-package" value="org.apache.cordova.dialogs.Notification" />
+    </feature>
+    <feature name="NetworkStatus">
+        <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
+    </feature>
+    <feature name="Zip">
+        <param name="android-package" value="org.apache.cordova.Zip" />
     </feature>
     <allow-intent href="market:*" />
     <name>CENP Revista</name>
@@ -19,7 +38,13 @@
         Clarear Propaganda
     </author>
     <icon src="icon.png" />
-    <splash src="splash.png" />
+    <splash height="480" src="www/res/screens/ios/screen-iphone-portrait.png" width="320" />
+    <splash height="960" src="www/res/screens/ios/screen-iphone-portrait-2x.png" width="640" />
+    <splash height="1024" src="www/res/screens/ios/screen-ipad-portrait.png" width="768" />
+    <splash height="2048" src="www/res/screens/ios/screen-ipad-portrait-2x.png" width="1536" />
+    <splash height="1136" src="www/res/screens/ios/screen-iphone-portrait-568h-2x.png" width="640" />
+    <splash height="1334" src="www/res/screens/ios/screen-iphone-portrait-667h.png" width="750" />
+    <splash height="2208" src="www/res/screens/ios/screen-iphone-portrait-736h.png" width="1242" />
     <icon height="180" platform="ios" src="www/res/icons/ios/icon-60@3x.png" width="180" />
     <icon height="60" platform="ios" src="www/res/icons/ios/icon-60.png" width="60" />
     <icon height="120" platform="ios" src="www/res/icons/ios/icon-60@2x.png" width="120" />
@@ -42,7 +67,7 @@
     <gap:plugin name="pushbots-cordova-plugin" source="npm" spec="^1.4.0" />
     <preference name="phonegap-version" value="cli-6.3.0" />
     <preference name="android-build-tool" value="gradle" />
-    <access origin="*" />
+    <access browserOnly="true" origin="*" />
     <access origin="*.pushbots.com" />
     <allow-navigation href="*" />
     <allow-intent href="http://*/*" />
@@ -51,4 +76,6 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <access origin="file:///*" />
+    <access origin="file:*" />
 </widget>
