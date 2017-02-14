@@ -110,11 +110,12 @@
             });
         }
 
-                      
 
-        $(document).ready(function () {
 
-                                     
+        $(function () {
+
+
+
             /*
             $("#teste").click(function(){
               cordova.InAppBrowser.open('http://www.cenp.com.br/Site/cenp_revista/download.php', '_blank', 'location=yes');
@@ -178,66 +179,65 @@
                 });
             });
 
+            window.setTimeout(function () {
+                var networkState = navigator.connection.type;
 
-            var networkState = navigator.connection.type;
+                console.log('AAAAAA - ' + networkState);
+                if (networkState !== 'none') {
+                    $.ajax({
+                        method: "GET",
+                        async: false,
+                        url: "http://clarearpropaganda.com.br/appcenp/revista/revista/leitor/apiRevistas2",
+                        beforeSend: function () { $('#wait').show(); },
+                        complete: function () { $('#wait').hide(); },
 
-
-            if (networkState !== 'none') {
-                $.ajax({
-                    method: "GET",
-                    async: false,
-                    url: "http://clarearpropaganda.com.br/appcenp/revista/revista/leitor/apiRevistas2",
-                    crossDomain: true,
-                    dataType: 'html',
-                    beforeSend: function () { $('#wait').show(); },
-                    complete: function () { $('#wait').hide(); },
-
-                    statusCode: {
-                        404: function () {
-                            console.log('Página fora do ar');
+                        statusCode: {
+                            404: function () {
+                                console.log('Página fora do ar');
+                            }
                         }
-                    }
 
-                })
-                      .done(function (resultado) {
-                          window.localStorage.setItem('CAPA', resultado);
-                          $('.revistas').html(resultado);
-                          //$(".download").hide();
-                          window.setTimeout(function () {
-                              $.each($('.download'), function (key, value) {
-                                  //console.log($('.download:eq(' + key + ')').attr('id'));
-                                  //window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dir) { dir.getDirectory($('.download:eq(' + key + ')').attr('id'), { create: false }, function (e) { $('.download:eq(' + key + ')').remove(); }, function (e) { }); });
-                                  window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dir) { dir.getDirectory($('.download:eq(' + key + ')').attr('id'), { create: false }, function (e) { $('.download:eq(' + key + ')').remove(); }, function (e) { }); });
-                              });
-                          }, 600);
-                      })
-                      .fail(function () {
+                    })
+                          .done(function (resultado) {
+                              localStorage.setItem('CAPA', resultado);
+                              $('.revistas').html(resultado);
+                              console.log(resultado);
+                              //$(".download").hide();
+                              window.setTimeout(function () {
+                                  $.each($('.download'), function (key, value) {
+                                      //console.log($('.download:eq(' + key + ')').attr('id'));
+                                      //window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dir) { dir.getDirectory($('.download:eq(' + key + ')').attr('id'), { create: false }, function (e) { $('.download:eq(' + key + ')').remove(); }, function (e) { }); });
+                                      window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dir) { dir.getDirectory($('.download:eq(' + key + ')').attr('id'), { create: false }, function (e) { $('.download:eq(' + key + ')').remove(); }, function (e) { }); });
+                                  });
+                              }, 600);
+                          })
+                          .fail(function () {
 
-                          alert("Por favor verifique sua conexão com a internet e tente novamente.");
-                          //location.href = "login.html";
-                      })
-                      .always(function () {
-                          //alert( "complete" );
-                      });
-            } else {
-                var resultado;
-                resultado = window.localStorage.getItem('CAPA');
-                $('.revistas').html('<div>MODO OFFLINE<br></div>' + resultado);
-                console.log(resultado);
-                //$(".download").hide();
-                window.setTimeout(function () {
-                    $.each($('.download'), function (key, value) {
-                        //console.log($('.download:eq(' + key + ')').attr('id'));
-                        //window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dir) { dir.getDirectory($('.download:eq(' + key + ')').attr('id'), { create: false }, function (e) { $('.download:eq(' + key + ')').remove(); }, function (e) { }); });
-                        window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dir) { dir.getDirectory($('.download:eq(' + key + ')').attr('id'), { create: false }, function (e) { $('.download:eq(' + key + ')').remove(); }, function (e) { }); });
-                    });
-                    $('img.center-block').parent.hide();
-                    $('img.center-block').hide();
-                }, 600);
+                              alert("Por favor verifique sua conexão com a internet e tente novamente.");
+                              //location.href = "login.html";
+                          })
+                          .always(function () {
+                              //alert( "complete" );
+                          });
+                } else {
+                    var resultado;
+                    resultado = localStorage.getItem('CAPA');
+                    $('.revistas').html('<div>MODO OFFLINE<br></div>' + resultado);
+                    //console.log(resultado);
+                    //$(".download").hide();
+                    window.setTimeout(function () {
+                        $.each($('.download'), function (key, value) {
+                            //console.log($('.download:eq(' + key + ')').attr('id'));
+                            //window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dir) { dir.getDirectory($('.download:eq(' + key + ')').attr('id'), { create: false }, function (e) { $('.download:eq(' + key + ')').remove(); }, function (e) { }); });
+                            window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dir) { dir.getDirectory($('.download:eq(' + key + ')').attr('id'), { create: false }, function (e) { $('.download:eq(' + key + ')').remove(); }, function (e) { }); });
+                        });
+                        $('img.center-block').parent.hide();
+                        $('img.center-block').hide();
+                    }, 600);
 
-            }
+                }
 
-
+            }, 1300);
 
         });
     </script>
