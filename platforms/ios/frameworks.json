@@ -1,6 +1,6 @@
 {
+    "AudioToolbox.framework": 1,
     "SystemConfiguration.framework": 2,
     "CoreTelephony.framework": 2,
-    "libz.dylib": 1,
-    "AudioToolbox.framework": 1
+    "libz.dylib": 1
 }

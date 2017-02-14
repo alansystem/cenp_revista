@@ -6,7 +6,7 @@
     <meta name="msapplication-tap-highlight" content="no" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
     <link rel="stylesheet" href="css/bootstrap.css">
-    <script src="js/download.js"></script>
+    <!--<script src="js/download.js"></script>-->
     <title>CENP</title>
     <script type="text/javascript">
         function loadURL(url) {
@@ -110,8 +110,11 @@
             });
         }
 
+                      
 
-        $(function () {
+        $(document).ready(function () {
+
+                                     
             /*
             $("#teste").click(function(){
               cordova.InAppBrowser.open('http://www.cenp.com.br/Site/cenp_revista/download.php', '_blank', 'location=yes');
@@ -127,68 +130,15 @@
 
             $(document).on("click", ".download", function (e) {
 
-                //var c = cordova.file.dataDirectory;
                 var c = cordova.file.dataDirectory;
 
                 var id = $(this).attr('id');
                 var url = $(this).attr('href');
 
-                //$(this).replaceWith('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="porcentagem' + id + '"></span>');
-
                 downloadArquivo(id, url);
 
 
                 e.preventDefault();
-                //alert($(this).attr('id'));
-                //alert($(this).attr('href'));
-
-                //return false;
-
-                //var edicao = $(this).attr('id');
-                //var revista_numero = edicao.split('_');
-                //var nome = localStorage.getItem('nome');
-                //var email = localStorage.getItem('email');
-                //var id_leitor = localStorage.getItem('id_cadastro');
-                //var id_revista = localStorage.getItem('revista_id');
-
-
-                //$('.modal').modal();
-                //$('#msgModal').html('Recebemos sua solicitação para a <b>Edição ' + revista_numero[1] + '</b>. <br>Dentro de alguns minutos você receberá em seu email <b>(' + email + ')</b> sua Revista. <br><br>Boa leitura.');
-
-                //$.ajax({
-                //    method: "POST",
-                //    async: true,
-                //    url: "http://clarearpropaganda.com.br/appcenp/revista/revista/leitor/apiFilaDownload",
-                //    crossDomain: true,
-                //    data: { edicao: edicao, email: email, id_leitor: id_leitor, id_revista: id_revista, nome: nome },
-                //    dataType: 'html',
-                //    beforeSend: function () { $('#wait').show(); },
-                //    complete: function () { $('#wait').hide(); },
-
-                //    statusCode: {
-                //        404: function () {
-                //            console.log('Página fora do ar');
-                //        }
-                //    }
-
-                //})
-                //      .done(function (resultado) {
-
-                //          console.log(resultado);
-
-                //      })
-                //      .fail(function () {
-
-                //          //alert( "Por favor verifique sua conexão com a internet e tente novamente." );
-                //      })
-                //      .always(function () {
-                //          //alert( "complete" );
-                //      });
-
-
-
-
-                //downloadFile('http://www.cenp.com.br/Site/cenp_revista/'+edicao+'.pdf');
             });
 
 
@@ -229,41 +179,64 @@
             });
 
 
-            $.ajax({
-                method: "GET",
-                async: false,
-                url: "http://clarearpropaganda.com.br/appcenp/revista/revista/leitor/apiRevistas2",
-                crossDomain: true,
-                dataType: 'html',
-                beforeSend: function () { $('#wait').show(); },
-                complete: function () { $('#wait').hide(); },
+            var networkState = navigator.connection.type;
 
-                statusCode: {
-                    404: function () {
-                        console.log('Página fora do ar');
+
+            if (networkState !== 'none') {
+                $.ajax({
+                    method: "GET",
+                    async: false,
+                    url: "http://clarearpropaganda.com.br/appcenp/revista/revista/leitor/apiRevistas2",
+                    crossDomain: true,
+                    dataType: 'html',
+                    beforeSend: function () { $('#wait').show(); },
+                    complete: function () { $('#wait').hide(); },
+
+                    statusCode: {
+                        404: function () {
+                            console.log('Página fora do ar');
+                        }
                     }
-                }
 
-            })
-                  .done(function (resultado) {
-                      $('.revistas').html(resultado);
-                      //$(".download").hide();
-                      window.setTimeout(function () {
-                          $.each($('.download'), function (key, value) {
-                              //console.log($('.download:eq(' + key + ')').attr('id'));
-                              //window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dir) { dir.getDirectory($('.download:eq(' + key + ')').attr('id'), { create: false }, function (e) { $('.download:eq(' + key + ')').remove(); }, function (e) { }); });
-                              window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dir) { dir.getDirectory($('.download:eq(' + key + ')').attr('id'), { create: false }, function (e) { $('.download:eq(' + key + ')').remove(); }, function (e) { }); });
-                          });
-                      }, 600);
-                  })
-                  .fail(function () {
+                })
+                      .done(function (resultado) {
+                          window.localStorage.setItem('CAPA', resultado);
+                          $('.revistas').html(resultado);
+                          //$(".download").hide();
+                          window.setTimeout(function () {
+                              $.each($('.download'), function (key, value) {
+                                  //console.log($('.download:eq(' + key + ')').attr('id'));
+                                  //window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dir) { dir.getDirectory($('.download:eq(' + key + ')').attr('id'), { create: false }, function (e) { $('.download:eq(' + key + ')').remove(); }, function (e) { }); });
+                                  window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dir) { dir.getDirectory($('.download:eq(' + key + ')').attr('id'), { create: false }, function (e) { $('.download:eq(' + key + ')').remove(); }, function (e) { }); });
+                              });
+                          }, 600);
+                      })
+                      .fail(function () {
 
-                      alert("Por favor verifique sua conexão com a internet e tente novamente.");
-                      location.href = "login.html";
-                  })
-                  .always(function () {
-                      //alert( "complete" );
-                  });
+                          alert("Por favor verifique sua conexão com a internet e tente novamente.");
+                          //location.href = "login.html";
+                      })
+                      .always(function () {
+                          //alert( "complete" );
+                      });
+            } else {
+                var resultado;
+                resultado = window.localStorage.getItem('CAPA');
+                $('.revistas').html('<div>MODO OFFLINE<br></div>' + resultado);
+                console.log(resultado);
+                //$(".download").hide();
+                window.setTimeout(function () {
+                    $.each($('.download'), function (key, value) {
+                        //console.log($('.download:eq(' + key + ')').attr('id'));
+                        //window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dir) { dir.getDirectory($('.download:eq(' + key + ')').attr('id'), { create: false }, function (e) { $('.download:eq(' + key + ')').remove(); }, function (e) { }); });
+                        window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dir) { dir.getDirectory($('.download:eq(' + key + ')').attr('id'), { create: false }, function (e) { $('.download:eq(' + key + ')').remove(); }, function (e) { }); });
+                    });
+                    $('img.center-block').parent.hide();
+                    $('img.center-block').hide();
+                }, 600);
+
+            }
+
 
 
         });

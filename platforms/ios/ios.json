@@ -9,11 +9,7 @@
                 "parents": {
                     "/*": [
                         {
-                            "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"PushbotsPlugin\"><param name=\"ios-package\" value=\"PushbotsPlugin\" /></feature>",
+                            "xml": "<feature name=\"Notification\"><param name=\"ios-package\" value=\"CDVNotification\" /></feature>",
                             "count": 1
                         },
                         {
@@ -29,11 +25,15 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Notification\"><param name=\"ios-package\" value=\"CDVNotification\" /></feature>",
+                            "xml": "<feature name=\"NetworkStatus\"><param name=\"ios-package\" value=\"CDVConnection\" /></feature>",
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"NetworkStatus\"><param name=\"ios-package\" value=\"CDVConnection\" /></feature>",
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"PushbotsPlugin\"><param name=\"ios-package\" value=\"PushbotsPlugin\" /></feature>",
                             "count": 1
                         }
                     ],
@@ -48,20 +48,14 @@
         }
     },
     "installed_plugins": {
-        "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "br.com.cenp"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "br.com.cenp"
-        },
-        "pushbots-cordova-plugin": {
-            "PACKAGE_NAME": "br.com.cenp"
-        },
         "cordova-plugin-compat": {
-            "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+            "PACKAGE_NAME": "br.com.cenp"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "br.com.cenp"
         },
         "cordova-plugin-file": {
-            "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+            "PACKAGE_NAME": "br.com.cenp"
         },
         "cordova-plugin-file-transfer": {
             "PACKAGE_NAME": "br.com.cenp"
@@ -69,32 +63,30 @@
         "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "br.com.cenp"
         },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "br.com.cenp"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "br.com.cenp"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "br.com.cenp"
+        },
         "cordova-plugin-zip": {
             "PACKAGE_NAME": "br.com.cenp"
         },
-        "cordova-plugin-dialogs": {
-            "PACKAGE_NAME": "br.com.cenp"
-        },
-        "cordova-plugin-network-information": {
+        "pushbots-cordova-plugin": {
             "PACKAGE_NAME": "br.com.cenp"
         }
     },
     "dependent_plugins": {},
     "modules": [
         {
-            "id": "cordova-plugin-splashscreen.SplashScreen",
-            "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
-            "pluginId": "cordova-plugin-splashscreen",
-            "clobbers": [
-                "navigator.splashscreen"
-            ]
-        },
-        {
-            "id": "pushbots-cordova-plugin.PushbotsPlugin",
-            "file": "plugins/pushbots-cordova-plugin/www/pushbots.js",
-            "pluginId": "pushbots-cordova-plugin",
-            "clobbers": [
-                "PushbotsPlugin"
+            "id": "cordova-plugin-dialogs.notification",
+            "file": "plugins/cordova-plugin-dialogs/www/notification.js",
+            "pluginId": "cordova-plugin-dialogs",
+            "merges": [
+                "navigator.notification"
             ]
         },
         {
@@ -296,22 +288,6 @@
             ]
         },
         {
-            "id": "cordova-plugin-zip.Zip",
-            "file": "plugins/cordova-plugin-zip/zip.js",
-            "pluginId": "cordova-plugin-zip",
-            "clobbers": [
-                "zip"
-            ]
-        },
-        {
-            "id": "cordova-plugin-dialogs.notification",
-            "file": "plugins/cordova-plugin-dialogs/www/notification.js",
-            "pluginId": "cordova-plugin-dialogs",
-            "merges": [
-                "navigator.notification"
-            ]
-        },
-        {
             "id": "cordova-plugin-network-information.network",
             "file": "plugins/cordova-plugin-network-information/www/network.js",
             "pluginId": "cordova-plugin-network-information",
@@ -327,18 +303,42 @@
             "clobbers": [
                 "Connection"
             ]
+        },
+        {
+            "id": "cordova-plugin-splashscreen.SplashScreen",
+            "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+            "pluginId": "cordova-plugin-splashscreen",
+            "clobbers": [
+                "navigator.splashscreen"
+            ]
+        },
+        {
+            "id": "cordova-plugin-zip.Zip",
+            "file": "plugins/cordova-plugin-zip/zip.js",
+            "pluginId": "cordova-plugin-zip",
+            "clobbers": [
+                "zip"
+            ]
+        },
+        {
+            "id": "pushbots-cordova-plugin.PushbotsPlugin",
+            "file": "plugins/pushbots-cordova-plugin/www/pushbots.js",
+            "pluginId": "pushbots-cordova-plugin",
+            "clobbers": [
+                "PushbotsPlugin"
+            ]
         }
     ],
     "plugin_metadata": {
-        "cordova-plugin-splashscreen": "4.0.1",
-        "cordova-plugin-whitelist": "1.2.2",
-        "pushbots-cordova-plugin": "1.4.1",
         "cordova-plugin-compat": "1.1.0",
+        "cordova-plugin-dialogs": "1.3.1",
         "cordova-plugin-file": "4.3.1",
         "cordova-plugin-file-transfer": "1.6.1",
         "cordova-plugin-inappbrowser": "1.2.1",
+        "cordova-plugin-network-information": "1.3.1",
+        "cordova-plugin-splashscreen": "4.0.1",
+        "cordova-plugin-whitelist": "1.2.2",
         "cordova-plugin-zip": "3.1.0",
-        "cordova-plugin-dialogs": "1.3.1",
-        "cordova-plugin-network-information": "1.3.1"
+        "pushbots-cordova-plugin": "1.4.1"
     }
 }

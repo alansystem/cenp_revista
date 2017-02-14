@@ -1,19 +1,11 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
-        "id": "cordova-plugin-splashscreen.SplashScreen",
-        "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
-        "pluginId": "cordova-plugin-splashscreen",
-        "clobbers": [
-            "navigator.splashscreen"
-        ]
-    },
-    {
-        "id": "pushbots-cordova-plugin.PushbotsPlugin",
-        "file": "plugins/pushbots-cordova-plugin/www/pushbots.js",
-        "pluginId": "pushbots-cordova-plugin",
-        "clobbers": [
-            "PushbotsPlugin"
+        "id": "cordova-plugin-dialogs.notification",
+        "file": "plugins/cordova-plugin-dialogs/www/notification.js",
+        "pluginId": "cordova-plugin-dialogs",
+        "merges": [
+            "navigator.notification"
         ]
     },
     {
@@ -215,22 +207,6 @@ module.exports = [
         ]
     },
     {
-        "id": "cordova-plugin-zip.Zip",
-        "file": "plugins/cordova-plugin-zip/zip.js",
-        "pluginId": "cordova-plugin-zip",
-        "clobbers": [
-            "zip"
-        ]
-    },
-    {
-        "id": "cordova-plugin-dialogs.notification",
-        "file": "plugins/cordova-plugin-dialogs/www/notification.js",
-        "pluginId": "cordova-plugin-dialogs",
-        "merges": [
-            "navigator.notification"
-        ]
-    },
-    {
         "id": "cordova-plugin-network-information.network",
         "file": "plugins/cordova-plugin-network-information/www/network.js",
         "pluginId": "cordova-plugin-network-information",
@@ -246,21 +222,45 @@ module.exports = [
         "clobbers": [
             "Connection"
         ]
+    },
+    {
+        "id": "cordova-plugin-splashscreen.SplashScreen",
+        "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+        "pluginId": "cordova-plugin-splashscreen",
+        "clobbers": [
+            "navigator.splashscreen"
+        ]
+    },
+    {
+        "id": "cordova-plugin-zip.Zip",
+        "file": "plugins/cordova-plugin-zip/zip.js",
+        "pluginId": "cordova-plugin-zip",
+        "clobbers": [
+            "zip"
+        ]
+    },
+    {
+        "id": "pushbots-cordova-plugin.PushbotsPlugin",
+        "file": "plugins/pushbots-cordova-plugin/www/pushbots.js",
+        "pluginId": "pushbots-cordova-plugin",
+        "clobbers": [
+            "PushbotsPlugin"
+        ]
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
-    "cordova-plugin-splashscreen": "4.0.1",
-    "cordova-plugin-whitelist": "1.2.2",
-    "pushbots-cordova-plugin": "1.4.1",
     "cordova-plugin-compat": "1.1.0",
+    "cordova-plugin-dialogs": "1.3.1",
     "cordova-plugin-file": "4.3.1",
     "cordova-plugin-file-transfer": "1.6.1",
     "cordova-plugin-inappbrowser": "1.2.1",
+    "cordova-plugin-network-information": "1.3.1",
+    "cordova-plugin-splashscreen": "4.0.1",
+    "cordova-plugin-whitelist": "1.2.2",
     "cordova-plugin-zip": "3.1.0",
-    "cordova-plugin-dialogs": "1.3.1",
-    "cordova-plugin-network-information": "1.3.1"
+    "pushbots-cordova-plugin": "1.4.1"
 };
 // BOTTOM OF METADATA
 });
