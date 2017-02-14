@@ -110,6 +110,7 @@
 		6B4DF3CBDDED440EB85E3230 /* ioapi.c */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = ioapi.c; path = "cordova-plugin-zip/Plugins/minizip/ioapi.c"; sourceTree = "<group>"; };
 		6E5776725C0C46DBB64161F4 /* CDVConnection.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVConnection.h; path = "cordova-plugin-network-information/CDVConnection.h"; sourceTree = "<group>"; };
 		70C87BA78B984BBBBCBD9884 /* PushbotsPlugin.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = PushbotsPlugin.h; path = "pushbots-cordova-plugin/PushbotsPlugin.h"; sourceTree = "<group>"; };
+		715E7BBD1E531BCE0089F3DB /* CENP Revista.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "CENP Revista.entitlements"; path = "CENP Revista/CENP Revista.entitlements"; sourceTree = "<group>"; };
 		762FFA0BA1494466802D0EC4 /* crypt.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = crypt.h; path = "cordova-plugin-zip/Plugins/minizip/crypt.h"; sourceTree = "<group>"; };
 		797BC27CBFCF4992A0D5830C /* CDVAssetLibraryFilesystem.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVAssetLibraryFilesystem.m; path = "cordova-plugin-file/CDVAssetLibraryFilesystem.m"; sourceTree = "<group>"; };
 		7C843A78D4664B4AB840D1EC /* Pushbots.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = Pushbots.framework; path = "CENP Revista/Plugins/pushbots-cordova-plugin/Pushbots.framework"; sourceTree = "<group>"; };
@@ -192,6 +193,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				715E7BBD1E531BCE0089F3DB /* CENP Revista.entitlements */,
 				EB87FDF41871DAF40020F90C /* config.xml */,
 				EB87FDF31871DA8E0020F90C /* www */,
 				EB87FDF11871DA420020F90C /* Staging */,
@@ -366,6 +368,11 @@
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
 						DevelopmentTeam = 5CSW9YFXG9;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -490,6 +497,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_ENTITLEMENTS = "CENP Revista/CENP Revista.entitlements";
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = 5CSW9YFXG9;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -505,6 +513,7 @@
 				INFOPLIST_FILE = "CENP Revista/CENP Revista-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.magtab.796;
 				PRODUCT_NAME = "CENP Revista";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -519,6 +528,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_ENTITLEMENTS = "CENP Revista/CENP Revista.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DEVELOPMENT_TEAM = 5CSW9YFXG9;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -532,6 +543,7 @@
 				INFOPLIST_FILE = "CENP Revista/CENP Revista-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.magtab.796;
 				PRODUCT_NAME = "CENP Revista";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
