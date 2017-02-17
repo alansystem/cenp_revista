@@ -90,7 +90,7 @@
                                                                                    
             var existeDir = 0;
 
-            window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dir) { dir.getDirectory("EDICAO_" + numero_revista, { create: false }, function (e) { local(); }, function (e) { online(); }); });
+            window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dir) { dir.getDirectory("EDICAO_" + numero_revista, { create: false }, function (e) { window.setTimeout(function () { local(); }, 1200); }, function (e) { online(); }); });
 
             function online() {
                 $.ajax({
@@ -222,12 +222,6 @@
 
         }
 
-        $(function () {
-
-            
-
-
-        });
     </script>
     <!-- IVC TAG starts plowing -->
     <script type="text/javascript">
